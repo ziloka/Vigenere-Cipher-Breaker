@@ -1,0 +1,6 @@
+{
+    "cmake.buildBeforeRun": true,
+    "files.associations": {
+        "map": "cpp"
+    }
+}

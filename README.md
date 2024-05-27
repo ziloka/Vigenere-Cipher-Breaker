@@ -16,16 +16,12 @@ Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
-To compile the program, navigate to the directory where the files are saved and execute the following command:
+To compile the program, navigate to the directory where the files are saved and execute the following commands:
 ```
+mkdir build
+cd build
+cmake ..
 make
-```
-This will execute the following commands, leading to the compiled program:
-```
-g++-11 -c vigenereCipherBreaker.cpp -std=c++17 -O2 -Wextra
-g++-11 -c nGramScorer.cpp -std=c++17 -O2 -Wextra
-g++-11 -c vigenereCipher.cpp -std=c++17 -O2 -Wextra
-g++-11 -o vigenereCipherBreaker vigenereCipherBreaker.o nGramScorer.o vigenereCipher.o -lpthread -O2 -Wextra
 ```
 To run the program, use the following syntax:
 ```
@@ -38,6 +34,15 @@ Verbose mode should be given a value of 1 or 0 to indicate true or false, respec
 It is recommended to use the Windows Subsystem for Linux (WSL) to run the program on a Windows machine.<br>
 The Microsoft website has <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">documentation</a> on how to do this.<br>
 Once WSL has been set up, the instructions provided for UNIX can be followed to run the program. 
+
+However, you can try this in a `Developer Command Prompt` using visual studio
+```
+mkdir build
+cd build
+cmake -G "NMake Makefiles" ..
+nmake
+```
+
 ## Example Runs
 The following are a few examples of what running the program is like: <br><br>
 **Verbose mode off**:<br><br>

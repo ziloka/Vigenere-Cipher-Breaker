@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <chrono>
 #include <cstring>
 #include <functional>
@@ -34,7 +35,7 @@ string formatCiphertext(const string &ciphertext) {
     formattedCiphertext.end(), [](char c){ return !isalpha(c); }), 
     formattedCiphertext.end());
     // convert all characters in the ciphertext string to uppercase
-    transform(formattedCiphertext.begin(), formattedCiphertext.end(), 
+    std::transform(formattedCiphertext.begin(), formattedCiphertext.end(), 
     formattedCiphertext.begin(), ::toupper);
     return formattedCiphertext;
 }
@@ -434,8 +435,8 @@ string getResponse() {
 
 int main(int argc, char *argv[]) {
     // Create n-gram scorers
-    nGramScorer trigram(std::ifstream(R"(ngrams/trigrams.txt)"));
-    nGramScorer quadgram(std::ifstream(R"(ngrams/quadgrams.txt)"));
+    nGramScorer trigram(std::ifstream(R"(../ngrams/trigrams.txt)"));
+    nGramScorer quadgram(std::ifstream(R"(../ngrams/quadgrams.txt)"));
 
     // Read and process command line arguments
     string originalCipherText, formattedCipherText, alphabet;   
@@ -475,7 +476,7 @@ int main(int argc, char *argv[]) {
             bool accommodateShortKey = (keyLength < 15);
             cout << "\nEXECUTING AN AGGRESSIVE ATTEMPT TO BREAK THE ENCRYPTION...\n\n";
             auto startTime = std::chrono::high_resolution_clock::now();
-            nGramScorer quintgram(std::ifstream(R"(ngrams/quintgrams.txt)"));
+            nGramScorer quintgram(std::ifstream(R"(../ngrams/quintgrams.txt)"));
             timeTaken += totalTimeTaken(startTime, breakEncryption, quadgram, quintgram, 4, keyLength, keyLength,
                                         alphabet,
                                         originalCipherText, formattedCipherText, false, true, accommodateShortKey,
@@ -483,7 +484,7 @@ int main(int argc, char *argv[]) {
             response = getResponse();
             attempts[2] = true;
         } else if (!attempts[3]) {
-            nGramScorer quintgram(std::ifstream(R"(ngrams/quintgrams.txt)"));
+            nGramScorer quintgram(std::ifstream(R"(../ngrams/quintgrams.txt)"));
             rangeStart = (rangeStart == 4) ? 5 : rangeStart;
             cout << "\nTRYING ALL KEYS WITHIN SPECIFIED RANGE IN A MORE AGGRESSIVE ATTEMPT...\n\n";
             auto startTime = std::chrono::high_resolution_clock::now();
